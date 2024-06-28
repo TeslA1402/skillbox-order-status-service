@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: order-status-service
+  kafka:
+    bootstrap-servers: localhost:29092
+    template:
+      default-topic: order-status-topic
+    consumer:
+      group-id: order-status-service-group
+      auto-offset-reset: earliest
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: '*'
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+server:
+  port: 8082
